@@ -1,0 +1,16 @@
+# OS files
+*.DS_Store
+Thumbs.db
+NTUSER.DAT*
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Project specific
+AppData/
+node_modules/
+.env
+.env.local
