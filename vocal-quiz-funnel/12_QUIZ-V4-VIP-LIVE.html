@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Твой голос — Тест: Ваш вокальный архетип</title>
+<style>
+  :root {
+    --turquoise: #00F5E0;
+    --turquoise-bright: #2AFFE6;
+    --turquoise-deep: #00B8A8;
+    --gold: #FFD56B;
+    --bg-dark: #06121A;
+    --bg-deep: #020A12;
+    --card: rgba(12, 28, 38, 0.65);
+    --card-border: rgba(0, 245, 224, 0.25);
+    --text: #E8F8F6;
+    --muted: #8AA0A8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse at top, rgba(0,245,224,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(255,213,107,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+  }
+  /* Animated background dots */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,245,224,0.15) 0%, transparent 4%),
+      radial-gradient(circle at 80% 20%, rgba(0,245,224,0.10) 0%, transparent 3%),
+      radial-gradient(circle at 70% 70%, rgba(255,213,107,0.08) 0%, transparent 4%),
+      radial-gradient(circle at 30% 80%, rgba(0,245,224,0.12) 0%, transparent 3%);
+    pointer-events: none;
+    animation: drift 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-30px, 20px) scale(1.05); }
+  }
+
+  /* TOP BAR with logo */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(6, 18, 26, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,245,224,0.15);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--turquoise-bright), var(--turquoise-deep));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow:
+      0 0 20px rgba(0, 245, 224, 0.6),
+      0 0 40px rgba(0, 245, 224, 0.3),
+      inset 0 0 12px rgba(255,255,255,0.2);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,245,224,0.6), 0 0 40px rgba(0,245,224,0.3); }
+    50% { box-shadow: 0 0 30px rgba(0,245,224,0.9), 0 0 60px rgba(0,245,224,0.5); }
+  }
+  .logo-icon svg { width: 22px; height: 22px; fill: #042A2A; }
+  .logo-text {
+    font-size: 18px; font-weight: 800; letter-spacing: 0.5px;
+    color: var(--turquoise);
+    text-shadow: 0 0 12px rgba(0,245,224,0.5);
+  }
+  .logo-text small {
+    display: block; font-size: 10px; font-weight: 500;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+    text-shadow: none;
+  }
+
+  .topbar-meta { display: flex; gap: 18px; font-size: 13px; align-items: center; }
+  .topbar-meta a {
+    color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 4px;
+    transition: text-shadow 0.2s;
+  }
+  .topbar-meta a:hover { text-shadow: 0 0 8px rgba(255,213,107,0.6); }
+  .topbar-meta .stars { color: var(--gold); letter-spacing: 1px; }
+  @media(max-width: 700px) { .topbar-meta { display: none; } }
+
+  /* MAIN */
+  .stage {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    position: relative; z-index: 1;
+  }
+  .screen { display: none; animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  .screen.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.4),
+      0 0 40px rgba(0,245,224,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+    font-size: 13px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .progress-bar {
+    flex: 1; height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--turquoise-deep), var(--turquoise-bright));
+    box-shadow: 0 0 12px rgba(0,245,224,0.7);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 2px;
+  }
+
+  h1 {
+    font-size: 38px; font-weight: 800; line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--turquoise-bright) 0%, var(--turquoise) 60%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+  }
+  h2 { font-size: 26px; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+  .question-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .question-sub { color: var(--muted); margin-bottom: 28px; font-size: 15px; }
+
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    background: rgba(255,255,255,0.025);
+    border: 1.5px solid rgba(0,245,224,0.15);
+    border-radius: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex; align-items: center; gap: 14px;
+    font-size: 16px;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+  .option::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(0,245,224,0.12), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .option:hover {
+    border-color: var(--turquoise);
+    background: rgba(0,245,224,0.05);
+    transform: translateX(4px);
+    box-shadow: 0 0 24px rgba(0,245,224,0.18);
+  }
+  .option:hover::before { opacity: 1; }
+  .option .emoji { font-size: 24px; flex-shrink: 0; }
+  .option .text { position: relative; z-index: 1; }
+  .option .text b { color: var(--turquoise-bright); }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 16px; font-weight: 700;
+    cursor: pointer; border: none;
+    text-decoration: none;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--turquoise-bright), var(--turquoise-deep));
+    color: #042A2A;
+    box-shadow: 0 8px 24px rgba(0,245,224,0.35), 0 0 30px rgba(0,245,224,0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,245,224,0.5), 0 0 40px rgba(0,245,224,0.4);
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    color: var(--turquoise);
+    border: 1.5px solid var(--card-border);
+  }
+  .btn-ghost:hover { border-color: var(--turquoise); }
+
+  /* WELCOME SCREEN specifics */
+  .welcome-bullets {
+    list-style: none;
+    margin: 24px 0 32px;
+    padding: 0;
+  }
+  .welcome-bullets li {
+    padding: 10px 0;
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text);
+    font-size: 16px;
+  }
+  .welcome-bullets li::before {
+    content: '✓';
+    width: 26px; height: 26px;
+    background: rgba(0,245,224,0.15);
+    color: var(--turquoise);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0,245,224,0.3);
+  }
+  .badge-gift {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, rgba(255,213,107,0.15), rgba(255,213,107,0.05));
+    border: 1px solid rgba(255,213,107,0.3);
+    color: var(--gold);
+    padding: 8px 16px; border-radius: 30px;
+    font-weight: 700; font-size: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 16px rgba(255,213,107,0.15);
+  }
+
+  /* UNIQUENESS PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 28px; }
+  .pill {
+    background: rgba(0,245,224,0.08);
+    border: 1px solid rgba(0,245,224,0.2);
+    padding: 8px 14px; border-radius: 30px;
+    font-size: 13px; color: var(--turquoise);
+  }
+
+  /* VALIDATION SCREEN */
+  .validation {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .validation .quote-mark {
+    font-size: 64px; line-height: 1; color: var(--turquoise);
+    opacity: 0.4;
+    margin-bottom: -20px;
+  }
+  .validation p {
+    font-size: 19px; line-height: 1.5;
+    font-style: italic;
+    color: var(--text);
+    margin: 16px 32px;
+  }
+  .validation .author {
+    color: var(--turquoise); font-size: 14px; margin-top: 16px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* BONUS screen */
+  .bonus-card {
+    text-align: center;
+    padding: 12px 0;
+  }
+  .bonus-card .icon-gift {
+    font-size: 64px;
+    filter: drop-shadow(0 0 20px rgba(255,213,107,0.6));
+    margin-bottom: 12px;
+  }
+  .bonus-card .deadline {
+    color: var(--gold); font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .bonus-big {
+    font-size: 32px; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), #FFE8A6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 18px 0;
+    text-shadow: 0 0 30px rgba(255,213,107,0.3);
+  }
+  .bonus-card .why-box {
+    background: rgba(255,213,107,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px; border-radius: 8px;
+    text-align: left; margin: 20px 0;
+    font-size: 15px; color: var(--text);
+  }
+
+  /* RESULT */
+  .archetype-title {
+    font-size: 32px; font-weight: 800;
+    background: linear-gradient(135deg, var(--turquoise-bright), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 6px;
+  }
+  .archetype-tagline { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+  .result-content { font-size: 16px; line-height: 1.7; }
+  .result-content p { margin-bottom: 14px; }
+  .result-content b { color: var(--turquoise-bright); }
+
+  /* FORM */
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.5px; }
+  .form-group input, .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(0,245,224,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--turquoise);
+    box-shadow: 0 0 16px rgba(0,245,224,0.2);
+    background: rgba(0,245,224,0.04);
+  }
+  .scarcity {
+    text-align: center; margin-top: 14px;
+    color: var(--gold); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .scarcity .dot {
+    display: inline-block; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    margin-right: 6px;
+    box-shadow: 0 0 10px var(--gold);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.4; } }
+
+  /* THANKS */
+  .thanks-icon {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--turquoise-bright), var(--turquoise-deep));
+    margin: 0 auto 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 50px;
+    box-shadow: 0 0 40px rgba(0,245,224,0.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* FOOTER */
+  .footer-info {
+    text-align: center;
+    margin-top: 32px;
+    padding: 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .footer-info a { color: var(--turquoise); text-decoration: none; }
+  .footer-info a:hover { text-decoration: underline; }
+  .footer-info .stars { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    h1 { font-size: 28px; }
+    .question-title { font-size: 20px; }
+    .card { padding: 28px 22px; border-radius: 18px; }
+    .option { font-size: 15px; padding: 16px; }
+    .stage { padding: 24px 14px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-icon">
+      <!-- Microphone SVG -->
+      <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm7 11a1 1 0 0 0-1 1 6 6 0 0 1-12 0 1 1 0 0 0-2 0 8 8 0 0 0 7 7.93V23h-2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.07A8 8 0 0 0 20 13a1 1 0 0 0-1-1z"/></svg>
+    </div>
+    <div class="logo-text">
+      ТВОЙ ГОЛОС
+      <small>VOCAL STUDIO · НИЖНЕКАМСК</small>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <a href="https://2gis.ru/nizhnekamsk/search/Твой%20голос%20вокальная%20студия" target="_blank">
+      <span class="stars">★★★★★</span>&nbsp; Отзывы 2ГИС
+    </a>
+  </div>
+</header>
+
+<div class="stage">
+
+  <!-- ============== SCREEN 0: WELCOME ============== -->
+  <div class="screen active" data-screen="welcome">
+    <div class="card">
+      <div class="badge-gift">🎁 Бонус: бесплатная диагностика голоса 60 мин</div>
+      <h1>Ваш вокальный архетип за&nbsp;2&nbsp;минуты</h1>
+      <p style="color: var(--muted); font-size: 17px; margin-bottom: 8px;">
+        6 коротких вопросов — и вы узнаете, что <b style="color: var(--turquoise-bright)">именно вам</b> мешает петь свободно и как это исправить.
+      </p>
+
+      <div class="pills">
+        <div class="pill">🎤 Только 1-на-1 с педагогом</div>
+        <div class="pill">⏳ 25+ лет авторской методики</div>
+        <div class="pill">🏆 300+ выпускников</div>
+        <div class="pill">📆 Гибкий график без абонплаты</div>
+        <div class="pill">🛠️ Полное техническое сопровождение</div>
+        <div class="pill">👤 Взрослые с нуля</div>
+      </div>
+
+      <ul class="welcome-bullets">
+        <li>Узнаете свой <b>вокальный архетип</b> — один из 5</li>
+        <li>Получите <b>персональный план</b> на 8 недель</li>
+        <li>В подарок — <b>бесплатное занятие-диагностика 60 мин</b></li>
+      </ul>
+
+      <button class="btn btn-primary" onclick="nextScreen()">
+        НАЧАТЬ ТЕСТ
+        <span>→</span>
+      </button>
+
+      <p style="font-size: 13px; color: var(--muted); margin-top: 18px;">
+        🔒 Без спама. Ваши данные защищены.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============== Q1 ============== -->
+  <div class="screen" data-screen="q1">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 1 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 16.6%"></div></div>
+      </div>
+      <div class="question-title">🎶 Когда вы слышите красиво поющего человека, что вы чувствуете в первые 3 секунды?</div>
+      <div class="question-sub">Выберите вариант, ближайший к вашему ощущению</div>
+      <div class="options">
+        <div class="option" onclick="answer('q1','A')"><span class="emoji">💔</span><span class="text">Лёгкая зависть — <b>«я бы тоже так хотела»</b></span></div>
+        <div class="option" onclick="answer('q1','B')"><span class="emoji">🥹</span><span class="text">Мурашки и слёзы — <b>музыка трогает до глубины</b></span></div>
+        <div class="option" onclick="answer('q1','C')"><span class="emoji">🤔</span><span class="text">Анализ — <b>«как он это делает технически?»</b></span></div>
+        <div class="option" onclick="answer('q1','D')"><span class="emoji">🔥</span><span class="text">Желание <b>попробовать прямо сейчас</b></span></div>
+        <div class="option" onclick="answer('q1','E')"><span class="emoji">😔</span><span class="text">Грусть — <b>«мне это уже не светит»</b></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Q2 ============== -->
+  <div class="screen" data-screen="q2">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 2 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 33.3%"></div></div>
+      </div>
+      <div class="question-title">💭 Представьте: через 2 месяца вы поёте свободно. В какой ситуации это для вас важнее всего?</div>
+      <div class="question-sub">То, что вы хотите по-настоящему</div>
+      <div class="options">
+        <div class="option" onclick="answer('q2','A')"><span class="emoji">🏠</span><span class="text">Дома, для себя — <b>наконец-то без стыда</b></span></div>
+        <div class="option" onclick="answer('q2','B')"><span class="emoji">🎉</span><span class="text">На <b>семейном празднике</b> (ДР, юбилей, свадьба)</span></div>
+        <div class="option" onclick="answer('q2','C')"><span class="emoji">🎤</span><span class="text">В <b>караоке с друзьями</b> — не отказываться от микрофона</span></div>
+        <div class="option" onclick="answer('q2','D')"><span class="emoji">📱</span><span class="text">Записать <b>кавер</b> и выложить</span></div>
+        <div class="option" onclick="answer('q2','E')"><span class="emoji">🎼</span><span class="text">На <b>сцене</b> — пусть маленькой, но настоящей</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Q3 ============== -->
+  <div class="screen" data-screen="q3">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 3 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+      </div>
+      <div class="question-title">🩹 Что чаще всего останавливает вас от пения?</div>
+      <div class="question-sub">Честно — мы не осудим</div>
+      <div class="options">
+        <div class="option" onclick="answer('q3','A')"><span class="emoji">🚫</span><span class="text"><b>«Мне в детстве сказали — нет слуха»</b></span></div>
+        <div class="option" onclick="answer('q3','B')"><span class="emoji">😨</span><span class="text">Стесняюсь своего голоса — <b>он мне не нравится</b></span></div>
+        <div class="option" onclick="answer('q3','C')"><span class="emoji">⏰</span><span class="text"><b>«Уже поздно, надо было раньше»</b></span></div>
+        <div class="option" onclick="answer('q3','D')"><span class="emoji">🎤</span><span class="text">Зажимается горло — <b>не получается отпустить</b></span></div>
+        <div class="option" onclick="answer('q3','E')"><span class="emoji">💔</span><span class="text">Пробовала раньше — <b>не получилось, разочаровалась</b></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== VALIDATION 1 ============== -->
+  <div class="screen" data-screen="val1">
+    <div class="card validation">
+      <div class="quote-mark">"</div>
+      <p>Спасибо, что поделились. Это слышим почти от каждого второго ученика. И каждый из них теперь поёт. Это лечится — мы покажем, как.</p>
+      <div class="author">— Педагог студии «Твой голос»</div>
+      <button class="btn btn-primary" style="margin-top: 24px;" onclick="nextScreen()">Дальше →</button>
+    </div>
+  </div>
+
+  <!-- ============== Q4 ============== -->
+  <div class="screen" data-screen="q4">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 4 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 66.6%"></div></div>
+      </div>
+      <div class="question-title">🛣️ Что вы уже пробовали, чтобы научиться петь?</div>
+      <div class="question-sub">Любой ответ — это нормально</div>
+      <div class="options">
+        <div class="option" onclick="answer('q4','A')"><span class="emoji">📺</span><span class="text"><b>YouTube</b> / приложения / самоучители</span></div>
+        <div class="option" onclick="answer('q4','B')"><span class="emoji">🎤</span><span class="text">Ходила на занятия раньше — <b>бросила</b></span></div>
+        <div class="option" onclick="answer('q4','C')"><span class="emoji">🤷</span><span class="text"><b>Только мечтаю</b> — пока ничего не пробовала</span></div>
+        <div class="option" onclick="answer('q4','D')"><span class="emoji">🛁</span><span class="text">Пою сама <b>дома «по слуху»</b></span></div>
+        <div class="option" onclick="answer('q4','E')"><span class="emoji">🎶</span><span class="text">Был <b>хор в школе/детстве</b></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== VALIDATION 2 ============== -->
+  <div class="screen" data-screen="val2">
+    <div class="card validation">
+      <div class="quote-mark">"</div>
+      <p>73% наших студентов сначала пробовали YouTube. Это нормально. Но самостоятельно <b style="color: var(--turquoise-bright)">невозможно услышать свой голос со стороны</b> — это видит только педагог 1-на-1.</p>
+      <div class="author">— Наша авторская методика 25+ лет</div>
+      <button class="btn btn-primary" style="margin-top: 24px;" onclick="nextScreen()">Дальше →</button>
+    </div>
+  </div>
+
+  <!-- ============== Q5 ============== -->
+  <div class="screen" data-screen="q5">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 5 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 83.3%"></div></div>
+      </div>
+      <div class="question-title">⚖️ Что вас сейчас больше всего смущает или останавливает?</div>
+      <div class="question-sub">Мы поможем закрыть этот вопрос на диагностике</div>
+      <div class="options">
+        <div class="option" onclick="answer('q5','A')"><span class="emoji">💰</span><span class="text"><b>Стоимость</b> — не знаю, потяну ли (но у нас <b>без абонплаты</b>)</span></div>
+        <div class="option" onclick="answer('q5','B')"><span class="emoji">⏱️</span><span class="text"><b>Время</b> — плотный график (у нас гибкое расписание под вас)</span></div>
+        <div class="option" onclick="answer('q5','C')"><span class="emoji">🤐</span><span class="text"><b>Стеснение</b> — страшно петь при педагоге</span></div>
+        <div class="option" onclick="answer('q5','D')"><span class="emoji">🤨</span><span class="text"><b>Не верю в результат</b> — может, «не моё»</span></div>
+        <div class="option" onclick="answer('q5','E')"><span class="emoji">✅</span><span class="text"><b>Ничего не смущает</b> — готова попробовать!</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Q6 ============== -->
+  <div class="screen" data-screen="q6">
+    <div class="card">
+      <div class="progress-wrap">
+        <span>Вопрос 6 / 6</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+      </div>
+      <div class="question-title">⏳ Когда вам удобно прийти на бесплатную диагностику голоса (60 мин, 1-на-1)?</div>
+      <div class="question-sub">Без обязательств. Просто познакомимся с вашим голосом.</div>
+      <div class="options">
+        <div class="option" onclick="answer('q6','A')"><span class="emoji">🔥</span><span class="text"><b>На этой неделе</b> — горю желанием</span></div>
+        <div class="option" onclick="answer('q6','B')"><span class="emoji">📅</span><span class="text"><b>На следующей неделе</b> — есть конкретный повод</span></div>
+        <div class="option" onclick="answer('q6','C')"><span class="emoji">📆</span><span class="text"><b>В течение месяца</b> — посмотрю расписание</span></div>
+        <div class="option" onclick="answer('q6','D')"><span class="emoji">🤔</span><span class="text"><b>Пока думаю</b> — оставлю контакт, перезвоните</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== BONUS SCREEN ============== -->
+  <div class="screen" data-screen="bonus">
+    <div class="card bonus-card">
+      <div class="icon-gift">🎁</div>
+      <div class="deadline">★ Только до конца месяца ★</div>
+      <h2 style="color: var(--text);">Если по итогам диагностики оформите пакет 8 занятий —</h2>
+      <div class="bonus-big">+ 2 урока В ПОДАРОК</div>
+      <p style="color: var(--muted); font-size: 15px;">итого 10 занятий × 55 минут, только 1-на-1 с педагогом</p>
+
+      <div class="why-box">
+        <b style="color: var(--gold);">Зачем этот бонус?</b><br>
+        Чтобы вы успели <b style="color: var(--turquoise-bright);">реально почувствовать прогресс</b>, а не просто «попробовать».
+        На диагностике никто не давит — вы решаете сами. Мы хотели, чтобы вы знали заранее.
+      </div>
+
+      <button class="btn btn-primary" onclick="showResult()">
+        СМОТРЕТЬ МОЙ РЕЗУЛЬТАТ →
+      </button>
+    </div>
+  </div>
+
+  <!-- ============== RESULT SCREEN ============== -->
+  <div class="screen" data-screen="result">
+    <div class="card">
+      <div style="font-size: 13px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;">
+        ВАШ ВОКАЛЬНЫЙ АРХЕТИП
+      </div>
+      <div class="archetype-title" id="archetype-title">—</div>
+      <div class="archetype-tagline" id="archetype-tagline">—</div>
+
+      <div class="result-content" id="archetype-content"></div>
+
+      <hr style="border: none; border-top: 1px solid rgba(0,245,224,0.15); margin: 28px 0;">
+
+      <h2 style="font-size: 22px; margin-bottom: 6px;">🎤 Запишитесь на бесплатную диагностику</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        Свяжемся в течение часа, чтобы подтвердить удобное время
+      </p>
+
+      <form onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>Имя</label>
+          <input type="text" required placeholder="Как к вам обращаться">
+        </div>
+        <div class="form-group">
+          <label>Телефон или Telegram</label>
+          <input type="text" required placeholder="+7 ... или @username">
+        </div>
+        <div class="form-group">
+          <label>Email (необязательно)</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Удобное время</label>
+          <select required>
+            <option value="">— выберите —</option>
+            <option>Будни вечер (18:00–21:00)</option>
+            <option>Выходные день (10:00–15:00)</option>
+            <option>Любое — позвоните, договоримся</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content: center; margin-top: 10px;">
+          🎁 ЗАПИСАТЬСЯ НА ДИАГНОСТИКУ
+        </button>
+        <div class="scarcity">
+          <span class="dot"></span> Места на эту неделю: 3 из 8
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============== THANKS ============== -->
+  <div class="screen" data-screen="thanks">
+    <div class="card" style="text-align: center;">
+      <div class="thanks-icon">✓</div>
+      <h1>Готово!</h1>
+      <p style="font-size: 17px; color: var(--text); margin-bottom: 16px;">
+        Ваша заявка принята. Педагог свяжется в течение <b style="color: var(--turquoise-bright);">1 часа</b> (рабочее время Пн-Сб 10:00–21:00).
+      </p>
+      <div style="background: rgba(0,245,224,0.05); border-radius: 14px; padding: 20px; margin: 20px 0; text-align: left;">
+        <p style="margin-bottom: 8px;">📍 <b>Адрес студии:</b><br><span style="color: var(--turquoise-bright);">г. Нижнекамск, ул. Некрасова, 12, офис 5</span></p>
+        <p style="margin-bottom: 8px;">📱 <b>Telegram:</b> <a href="https://t.me/tvoygolosstudia" style="color: var(--turquoise);">@tvoygolosstudia</a></p>
+        <p>⭐ <a href="https://2gis.ru/nizhnekamsk/search/Твой%20голос" target="_blank" style="color: var(--gold);">Отзывы в 2ГИС (★★★★★)</a></p>
+      </div>
+      <p style="color: var(--muted); font-size: 14px;">
+        🎁 На диагностике вы узнаете про бонус <b style="color: var(--gold);">+2 урока к пакету 8</b>. Без давления — просто опция.
+      </p>
+      <p style="margin-top: 20px; color: var(--turquoise);">До встречи 💫<br><small style="color: var(--muted);">Команда «Твой голос»</small></p>
+    </div>
+  </div>
+
+  <!-- FOOTER (always visible) -->
+  <div class="footer-info">
+    <b style="color: var(--turquoise);">ТВОЙ ГОЛОС</b> · Вокальная студия для взрослых с нуля<br>
+    г. Нижнекамск, ул. Некрасова, 12, оф. 5 · <a href="https://t.me/tvoygolosstudia">@tvoygolosstudia</a><br>
+    Авторская методика 25+ лет · 300+ выпускников · 1-на-1 без абонплаты<br>
+    <a href="https://2gis.ru/nizhnekamsk/search/Твой%20голос" target="_blank"><span class="stars">★★★★★</span> Отзывы в 2ГИС</a>
+  </div>
+
+</div>
+
+<script>
+  // ===== QUIZ FLOW =====
+  const flow = ['welcome','q1','q2','q3','val1','q4','val2','q5','q6','bonus','result','thanks'];
+  let currentIdx = 0;
+  const answers = {};
+
+  function showScreen(idx) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`[data-screen="${flow[idx]}"]`);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    currentIdx = idx;
+  }
+
+  function nextScreen() {
+    if (currentIdx < flow.length - 1) showScreen(currentIdx + 1);
+  }
+
+  function answer(q, val) {
+    answers[q] = val;
+    // Visual feedback then advance
+    event.currentTarget.style.background = 'rgba(0,245,224,0.15)';
+    event.currentTarget.style.borderColor = 'var(--turquoise)';
+    setTimeout(nextScreen, 280);
+  }
+
+  // ===== ARCHETYPE LOGIC =====
+  const archetypes = {
+    dreamer: {
+      title: '🦋 Мечтатель со страхом',
+      tagline: 'Вы давно хотите петь, но что-то держит',
+      content: `
+        <p>Кто-то когда-то посеял сомнение — и оно растёт уже годы. <b>«Нет слуха», «уже поздно», «у меня смешной голос»</b> — это всё мифы, которые мы развенчиваем на первом же уроке.</p>
+        <p>Правда: <b>96% людей имеют нормальный слух</b>. Возраст не имеет значения. Стеснение уходит за 2 урока 1-на-1.</p>
+        <p>📋 <b>Ваш план:</b> бесплатная диагностика 60 мин → персональный маршрут на 8 недель. Никакого хора, никаких групп — только вы и педагог.</p>
+      `
+    },
+    emotional: {
+      title: '🥹 Эмоциональный певец',
+      tagline: 'Музыка трогает вас до мурашек',
+      content: `
+        <p>У вас есть то, чему <b>нельзя научить</b> — внутренний отклик. Это половина успеха.</p>
+        <p>Не хватает только техники: дыхание, опора, свободное горло. По нашей авторской методике — это <b>4–8 занятий 1-на-1</b>.</p>
+        <p>🎁 А если решите продолжить — <b>+2 урока в подарок</b> к пакету 8.</p>
+      `
+    },
+    experienced: {
+      title: '🎯 Зажатый опытный',
+      tagline: 'Вы уже поёте, но чувствуете «потолок»',
+      content: `
+        <p>Дома, в караоке, может в хоре. Фундамент есть — нужна <b>тонкая настройка</b>, а не «с нуля».</p>
+        <p>На диагностике мы найдём 1–2 главные точки зажима и покажем, как их снять. Услышите свой голос со стороны <b>впервые</b>.</p>
+        <p>🎁 Пакет 8 + 2 в подарок при решении в день диагностики.</p>
+      `
+    },
+    deadline: {
+      title: '⏰ Горящий дедлайном',
+      tagline: 'У вас есть конкретный повод — это огромный плюс',
+      content: `
+        <p>Свадьба, юбилей, ДР — это <b>лучшая мотивация</b>. У нас был студент, который за 7 недель подготовил песню для свадьбы дочери.</p>
+        <p>📋 <b>Срочный план:</b> диагностика на этой неделе (приоритет) → интенсив 2 раза в неделю → подготовка <b>именно вашей песни</b>.</p>
+        <p>🎁 8 уроков + 2 в подарок = ровно цикл подготовки к событию.</p>
+      `
+    },
+    ambitious: {
+      title: '🎼 Амбициозный',
+      tagline: 'Вы хотите не просто петь — вы хотите ПЕТЬ',
+      content: `
+        <p>Сцена, запись, мастерство, рост. С такими целями нужен <b>план на 6+ месяцев</b>.</p>
+        <p>Начинаем с диагностики: полная оценка голоса → постановка реалистичных целей → маршрутная карта развития.</p>
+        <p>🎁 Пакет 8+2 = ваш стартовый цикл. Дальше — индивидуальная программа.</p>
+      `
+    }
+  };
+
+  function detectArchetype() {
+    const {q1, q2, q3, q4, q6} = answers;
+    // Deadline (highest priority)
+    if (q2 === 'B' && (q6 === 'A' || q6 === 'B')) return 'deadline';
+    // Ambitious
+    if (q2 === 'E' && (q6 === 'A' || q6 === 'B')) return 'ambitious';
+    // Experienced
+    if (q1 === 'C' || q4 === 'B' || q4 === 'D' || q4 === 'E') return 'experienced';
+    // Emotional
+    if (q1 === 'B' || q1 === 'D') return 'emotional';
+    // Default
+    return 'dreamer';
+  }
+
+  function showResult() {
+    const type = detectArchetype();
+    const a = archetypes[type];
+    document.getElementById('archetype-title').textContent = a.title;
+    document.getElementById('archetype-tagline').textContent = a.tagline;
+    document.getElementById('archetype-content').innerHTML = a.content;
+    nextScreen();
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    // TODO: send `answers` + form data to TG-bot webhook
+    console.log('Quiz answers:', answers);
+    nextScreen();
+  }
+</script>
+</body>
+</html>

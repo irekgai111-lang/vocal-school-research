@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Узнайте свой голос — Студия «Твой голос», Нижнекамск</title>
+<meta property="og:title" content="Почему не получается петь — и как это исправить за 1 занятие">
+<meta property="og:description" content="Пройдите тест и получите бесплатное пробное занятие в студии вокала «Твой голос», Нижнекамск">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --cream:#FBF7F0;
+  --warm:#F5EFE4;
+  --card:#FFFFFF;
+  --gold:#B8882A;
+  --gold2:#D4A843;
+  --gold-pale:#FDF6E3;
+  --gold-soft:#F7EBC6;
+  --turq:#0AE5D2;
+  --turq-bright:#2DFFE8;
+  --turq-deep:#08B5A4;
+  --turq-pale:#E0FBF7;
+  --turq-glow:rgba(10,229,210,.65);
+  --turq-stroke:#000;
+  --ink:#1C1410;
+  --ink-2:#352A28;
+  --text:#2A2018;
+  --muted:#8A7A68;
+  --border:#E8DFD0;
+  --rose:#C0394A;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 60px;}
+
+/* TOP */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px;border-bottom:1px solid var(--border);gap:16px;}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-mark{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--turq-bright) 0%,var(--turq) 50%,var(--turq-deep) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 18px var(--turq-glow),0 0 28px rgba(10,229,210,.4),inset 0 1px 2px rgba(255,255,255,.4);border:1px solid rgba(8,40,38,.3);}
+.logo-mark svg{width:20px;height:20px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3));}
+.logo-text{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--turq-bright);line-height:1.05;letter-spacing:-.4px;-webkit-text-stroke:1px var(--turq-stroke);text-stroke:1px var(--turq-stroke);text-shadow:0 0 8px var(--turq-glow),0 0 14px var(--turq-glow);paint-order:stroke fill;}
+.logo-text small{display:block;font-family:var(--sans);font-size:10.5px;font-weight:700;color:#4A3D2E;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;text-shadow:none;-webkit-text-stroke:0;}
+.since{text-align:right;font-family:var(--serif);}
+.since strong{display:block;color:var(--turq-bright);font-size:1.4rem;font-weight:700;line-height:1;letter-spacing:-.4px;-webkit-text-stroke:1px var(--turq-stroke);text-shadow:0 0 8px var(--turq-glow),0 0 14px var(--turq-glow);paint-order:stroke fill;}
+.since span{font-size:11px;color:var(--turq-deep);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--sans);font-weight:800;opacity:1;}
+
+/* PROGRESS */
+.prog-wrap{height:2px;background:var(--border);margin:0 -16px;display:none;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .6s cubic-bezier(.22,1,.36,1);}
+.prog-lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);text-align:center;padding:10px 0 0;display:none;font-weight:700;}
+
+/* SCREENS */
+.screen{display:none;}
+.screen.active{display:block;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* INTRO */
+.intro{padding:28px 0 12px;text-align:center;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--turq-bright);background:#0A1F1D;border:1.5px solid var(--turq);border-radius:24px;padding:7px 16px;margin-bottom:18px;box-shadow:0 0 22px rgba(10,229,210,.45),inset 0 0 10px rgba(10,229,210,.15);-webkit-text-stroke:.7px #000;text-shadow:0 0 6px var(--turq-glow);paint-order:stroke fill;}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--turq);box-shadow:0 0 10px var(--turq),0 0 16px var(--turq);animation:turqPulse 2s ease-in-out infinite;}
+@keyframes turqPulse{0%,100%{box-shadow:0 0 10px var(--turq),0 0 16px var(--turq);}50%{box-shadow:0 0 14px var(--turq-bright),0 0 24px var(--turq);}}
+.intro h1{font-family:var(--serif);font-size:clamp(1.85rem,6vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:14px;letter-spacing:-.3px;}
+.intro h1 em{font-style:italic;color:var(--turq-bright);font-weight:800;-webkit-text-stroke:1.8px var(--turq-stroke);text-shadow:0 0 14px var(--turq-glow),0 0 28px var(--turq-glow);paint-order:stroke fill;}
+.intro .lead{font-size:.97rem;color:var(--text);line-height:1.65;max-width:440px;margin:0 auto 22px;}
+.pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+.pill{display:inline-flex;align-items:center;gap:5px;background:white;border:1px solid var(--border);border-radius:24px;padding:6px 13px;font-size:12px;font-weight:700;color:var(--ink);}
+
+/* VALUE STRIP */
+.value-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:0 0 22px;}
+.vs-item{background:linear-gradient(180deg,#fff 0%,#FDF9F0 100%);border:1px solid var(--border);border-radius:14px;padding:16px 8px 14px;text-align:center;box-shadow:0 4px 14px rgba(184,136,42,.06);position:relative;overflow:hidden;}
+.vs-item::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--turq),var(--turq-bright),var(--turq));box-shadow:0 0 12px var(--turq-glow);}
+.vs-num{display:block;font-family:var(--serif);font-size:1.85rem;font-weight:700;color:var(--turq-bright);line-height:1;letter-spacing:-.5px;-webkit-text-stroke:1px var(--turq-stroke);text-shadow:0 0 10px var(--turq-glow);paint-order:stroke fill;margin-bottom:6px;}
+.vs-lbl{display:block;font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:.3px;line-height:1.35;text-transform:uppercase;}
+
+/* SAFETY BLOCK */
+.safety{background:linear-gradient(135deg,#0A1F1D 0%,#0D2624 100%);border-radius:20px;padding:26px 22px;margin-bottom:18px;color:var(--turq-pale);box-shadow:0 8px 28px rgba(0,0,0,.2),inset 0 0 30px rgba(10,229,210,.05);font-family:"Calibri","Segoe UI",Tahoma,sans-serif;}
+.safety h4{font-family:"Calibri","Segoe UI",sans-serif;font-size:1.18rem;font-weight:700;color:var(--turq-bright);margin-bottom:18px;text-align:center;letter-spacing:.3px;-webkit-text-stroke:.7px #000;text-shadow:0 0 8px var(--turq-glow);paint-order:stroke fill;}
+.safety ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;}
+.safety li{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;font-size:.96rem;line-height:1.45;color:#E8FBF8;background:rgba(10,229,210,.06);border:1px solid rgba(10,229,210,.18);border-radius:12px;transition:all .2s ease;word-wrap:break-word;overflow-wrap:anywhere;}
+.safety li:hover{background:rgba(10,229,210,.1);border-color:rgba(10,229,210,.35);}
+.safety li::before{content:"✓";color:var(--turq-bright);font-weight:800;flex-shrink:0;font-size:1.05rem;line-height:1.4;text-shadow:0 0 6px var(--turq-glow);}
+.safety li b{color:var(--turq-bright);font-weight:700;}
+
+/* TEACHER CARD */
+.teacher-card{background:linear-gradient(135deg,#fff 0%,#FDF9F0 100%);border:1px solid var(--border);border-radius:20px;padding:22px;display:flex;gap:18px;align-items:center;margin-bottom:18px;text-align:left;box-shadow:0 4px 16px rgba(184,136,42,.06);}
+.teacher-photo{width:150px;height:150px;border-radius:50%;flex-shrink:0;object-fit:cover;object-position:center top;border:4px solid var(--turq);box-shadow:0 8px 28px var(--turq-glow),0 0 0 1.5px rgba(10,229,210,.4),0 0 40px rgba(10,229,210,.3);}
+@media(max-width:460px){.teacher-photo{width:128px;height:128px;border-width:3px;}}
+.teacher-info h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.teacher-info p{font-size:.88rem;color:var(--text);line-height:1.55;margin-bottom:6px;}
+.teacher-info .exp{display:inline-flex;align-items:center;gap:5px;font-size:.85rem;font-weight:800;color:var(--turq-bright);background:#0A1F1D;padding:5px 12px;border-radius:12px;border:1.5px solid var(--turq);box-shadow:0 0 18px rgba(10,229,210,.4),inset 0 0 8px rgba(10,229,210,.15);-webkit-text-stroke:.8px #000;text-shadow:0 0 6px var(--turq-glow);paint-order:stroke fill;}
+
+/* NAME CARD */
+.name-card{background:white;border:1px solid var(--border);border-radius:20px;padding:30px 26px;text-align:center;box-shadow:0 4px 16px rgba(184,136,42,.05);}
+.name-card h2{font-family:var(--serif);font-size:1.4rem;font-weight:600;margin-bottom:8px;color:var(--ink);letter-spacing:-.2px;}
+.name-card .sub{font-size:.92rem;color:var(--text);margin-bottom:20px;line-height:1.6;}
+.name-inp{width:100%;background:var(--warm);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px;font-family:var(--sans);font-size:1rem;color:var(--ink);outline:none;transition:all .2s;text-align:center;margin-bottom:14px;-webkit-appearance:none;font-weight:500;}
+.name-inp:focus{border-color:var(--gold);background:white;box-shadow:0 0 0 3px var(--gold-soft);}
+.name-inp::placeholder{color:var(--muted);font-weight:400;}
+
+/* BUTTONS */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:18px 28px;font-family:var(--sans);font-size:1rem;font-weight:800;letter-spacing:.4px;border:none;border-radius:60px;cursor:pointer;transition:all .25s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;}
+.btn-gold{background:linear-gradient(135deg,#F0CC5E 0%,#D4A843 25%,#B8882A 55%,#9C6E18 100%);color:#2A1A00;box-shadow:0 8px 20px rgba(184,136,42,.35),0 2px 6px rgba(184,136,42,.25),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 4px rgba(120,80,10,.3);text-shadow:0 1px 0 rgba(255,255,255,.3);border:1px solid rgba(140,90,20,.4);}
+.btn-gold::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transition:left .8s cubic-bezier(.22,1,.36,1);pointer-events:none;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(184,136,42,.5),0 4px 10px rgba(184,136,42,.3),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 4px rgba(120,80,10,.3);}
+.btn-gold:hover::before{left:120%;}
+.btn-gold:active{transform:translateY(2px) scale(.985);box-shadow:0 3px 10px rgba(184,136,42,.4),0 1px 3px rgba(184,136,42,.3),inset 0 2px 5px rgba(120,80,10,.4),inset 0 -1px 0 rgba(255,255,255,.2);background:linear-gradient(135deg,#D4A843 0%,#B8882A 50%,#8C6618 100%);transition:all .08s ease;}
+
+/* QUESTION */
+.q-head{padding:26px 0 20px;}
+.q-head h2{font-family:var(--serif);font-size:1.45rem;font-weight:600;line-height:1.3;color:var(--ink);letter-spacing:-.2px;}
+.q-head .hint{font-size:.92rem;color:#4A3D2E;margin-top:8px;font-weight:600;}
+.opts{display:grid;grid-template-columns:1fr;gap:10px;}
+.opt{background:white;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .25s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;user-select:none;position:relative;overflow:hidden;}
+.opt::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--turq-pale) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.opt:hover{border-color:var(--turq);transform:translateX(3px);box-shadow:0 6px 18px rgba(10,229,210,.18);}
+.opt:hover::before{opacity:.6;}
+.opt:hover .opt-cube{transform:rotate(-2deg) scale(1.05);box-shadow:0 6px 16px var(--turq-glow),inset 0 1px 0 rgba(255,255,255,.35);}
+.opt.sel{border-color:var(--turq);background:var(--turq-pale);box-shadow:0 0 0 1.5px var(--turq),0 6px 20px rgba(10,229,210,.25);}
+.opt.sel .opt-cube{background:linear-gradient(135deg,var(--turq-bright) 0%,var(--turq) 50%,var(--turq-deep) 100%);}
+.opt-cube{width:44px;height:44px;background:linear-gradient(135deg,#1C1410 0%,#352A28 100%);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--turq-bright);font-family:var(--serif);font-size:1.45rem;font-weight:700;flex-shrink:0;position:relative;z-index:1;box-shadow:0 4px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.15);transition:all .3s cubic-bezier(.22,1,.36,1);-webkit-text-stroke:.5px #000;text-shadow:0 0 8px var(--turq-glow);paint-order:stroke fill;border:1px solid rgba(10,229,210,.3);}
+.opt-lbl{font-size:.96rem;font-weight:700;color:var(--ink);line-height:1.4;position:relative;z-index:1;flex:1;}
+
+/* RESULT */
+.confetti{text-align:center;font-size:42px;letter-spacing:14px;padding:28px 0 12px;line-height:1;animation:pop .6s cubic-bezier(.34,1.56,.64,1);}
+.confetti .star{display:inline-block;color:var(--turq-bright);text-shadow:0 1px 0 #08B5A4,0 2px 0 #0AE5D2,0 3px 0 #0E9E92,0 4px 0 #086D63,0 5px 0 #052E2A,0 6px 6px rgba(0,0,0,.4),0 0 12px var(--turq-glow),0 0 24px var(--turq-glow),0 0 36px rgba(10,229,210,.4);animation:starTwinkle 3.5s ease-in-out infinite;transform-origin:center;will-change:filter,transform;}
+.confetti .star:nth-child(1){animation-delay:0s;}
+.confetti .star:nth-child(3){animation-delay:-1.2s;}
+.confetti .star:nth-child(5){animation-delay:-2.4s;}
+.confetti .dot{display:inline-block;color:var(--turq-deep);font-size:.6em;vertical-align:middle;opacity:.6;}
+@keyframes pop{0%{transform:scale(.3);opacity:0;}70%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+@keyframes starTwinkle{
+  0%,100%{transform:scale(1) rotate(0deg);filter:brightness(.85) drop-shadow(0 0 6px var(--turq-glow));}
+  50%{transform:scale(1.15) rotate(8deg);filter:brightness(1.35) drop-shadow(0 0 18px var(--turq-bright));}
+}
+.hail{font-family:var(--serif);font-size:1.7rem;font-weight:700;text-align:center;color:var(--ink);margin-bottom:22px;font-style:italic;line-height:1.25;letter-spacing:-.2px;}
+.hail .shimmer{display:inline-block;background:linear-gradient(90deg,var(--turq-deep) 0%,var(--turq-bright) 35%,#FFFFFF 50%,var(--turq-bright) 65%,var(--turq-deep) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800;font-style:normal;animation:shimmer 2.6s linear infinite;-webkit-text-stroke:0;filter:drop-shadow(1px 1px 0 #000) drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(0 0 10px var(--turq-glow)) drop-shadow(0 0 20px var(--turq-glow));}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+@media(max-width:460px){.hail{font-size:1.4rem;}}
+.p-card{border-radius:22px;padding:30px 26px;margin-bottom:16px;position:relative;overflow:hidden;}
+.p-card::before{content:"";position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none;}
+.p-ico{display:inline-block;font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:2px;padding:6px 16px;border:1.5px solid currentColor;border-radius:6px;margin-bottom:14px;opacity:.85;}
+.p-name{font-family:var(--serif);font-size:1.7rem;font-weight:700;margin-bottom:8px;letter-spacing:-.2px;}
+.p-desc{font-size:.92rem;opacity:.88;line-height:1.7;margin-bottom:14px;}
+.p-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.p-tag{background:rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+.pc-drama{background:linear-gradient(135deg,#1E0810 0%,#2D0F1A 100%);color:#F5B0BE;}
+.pc-drama .p-tag{background:rgba(200,75,110,.22);}
+.pc-lyric{background:linear-gradient(135deg,#071628 0%,#0C2238 100%);color:#90C4F0;}
+.pc-lyric .p-tag{background:rgba(74,124,219,.22);}
+.pc-jazz{background:linear-gradient(135deg,#170F02 0%,#241808 100%);color:#E8C06A;}
+.pc-jazz .p-tag{background:rgba(212,168,67,.22);}
+.pc-pop{background:linear-gradient(135deg,#0E0C22 0%,#1A1632 100%);color:#B0BCFF;}
+.pc-pop .p-tag{background:rgba(154,176,255,.22);}
+
+/* LESSON STEPS */
+.lesson-box{background:white;border:1px solid var(--border);border-radius:18px;padding:22px 22px;margin-bottom:16px;}
+.lesson-box h4{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--ink);}
+.lstep{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
+.lstep:last-child{margin-bottom:0;}
+.lnum{min-width:28px;height:28px;background:linear-gradient(135deg,var(--ink),var(--ink-2));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+.ltext{font-size:.92rem;color:var(--text);line-height:1.55;padding-top:3px;}
+.ltext strong{color:var(--ink);display:block;font-size:.92rem;margin-bottom:2px;font-weight:800;}
+
+/* REVIEWS */
+.reviews-title{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:14px;text-align:center;font-style:italic;letter-spacing:-.2px;}
+.reviews{display:flex;flex-direction:column;gap:14px;margin-bottom:22px;}
+.review{background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 16px 16px 0;padding:18px 20px;box-shadow:0 4px 14px rgba(184,136,42,.08);position:relative;}
+.review::before{content:"\201C";position:absolute;top:8px;right:18px;font-family:var(--serif);font-size:3.5rem;color:var(--gold);opacity:.15;line-height:1;pointer-events:none;}
+.review p{font-size:.95rem;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:10px;position:relative;z-index:1;}
+.review p b{color:var(--ink);font-weight:700;font-style:normal;}
+.reviewer{font-size:.84rem;font-weight:800;color:#4A3D2E;letter-spacing:.5px;}
+
+/* FORM */
+.form-card{background:white;border:1px solid var(--border);border-radius:20px;padding:28px 24px;box-shadow:0 4px 16px rgba(184,136,42,.05);}
+.form-card h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:8px;color:var(--ink);letter-spacing:-.2px;}
+.form-sub{font-size:.9rem;color:var(--text);margin-bottom:22px;line-height:1.6;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:11.5px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:#4A3D2E;margin-bottom:7px;}
+.finput{width:100%;background:var(--warm);border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;font-family:var(--sans);font-size:.95rem;color:var(--ink);outline:none;transition:all .2s;-webkit-appearance:none;font-weight:500;}
+.finput:focus{border-color:var(--gold);background:white;box-shadow:0 0 0 3px var(--gold-soft);}
+.finput::placeholder{color:var(--muted);font-weight:400;}
+.days-row{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.dday{background:var(--warm);border:1.5px solid var(--border);border-radius:9px;padding:9px 2px;font-size:11px;font-weight:800;color:var(--muted);cursor:pointer;text-align:center;transition:all .2s;user-select:none;}
+.dday:hover{border-color:var(--gold2);color:var(--gold);}
+.dday.on{background:var(--gold-pale);border-color:var(--gold);color:var(--gold);transform:scale(1.05);}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fsel{width:100%;background:var(--warm);border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;font-family:var(--sans);font-size:.92rem;color:var(--ink);outline:none;cursor:pointer;transition:all .2s;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238A7A68' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;font-weight:600;}
+.fsel:focus{border-color:var(--gold);background-color:white;}
+.consent-row{display:flex;gap:11px;align-items:flex-start;margin:14px 0 16px;font-size:.8rem;color:var(--text);line-height:1.6;}
+.consent-row input[type=checkbox]{margin-top:2px;accent-color:var(--gold);flex-shrink:0;width:16px;height:16px;cursor:pointer;}
+.consent-row label{cursor:pointer;}
+.consent-row a{color:var(--gold);font-weight:700;}
+.btn-note{text-align:center;font-size:.86rem;color:#4A3D2E;margin-top:12px;line-height:1.6;font-weight:600;}
+.errmsg{display:none;font-size:.78rem;color:var(--rose);font-weight:700;margin-top:5px;}
+.has-err .finput,.has-err .fsel{border-color:var(--rose)!important;background:#FCEEF0!important;}
+.has-err .errmsg{display:block;}
+.form-s2{display:none;}
+
+/* SHARE */
+.share-box{background:var(--gold-pale);border:1px solid var(--gold-soft);border-radius:16px;padding:18px 20px;text-align:center;margin-top:16px;}
+.share-box p{font-size:.9rem;color:var(--ink);margin-bottom:14px;line-height:1.55;}
+.share-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;border:none;border-radius:11px;padding:11px 22px;font-family:var(--sans);font-size:.86rem;font-weight:800;cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.3px;}
+.share-btn:hover{background:var(--ink-2);transform:translateY(-1px);}
+
+/* THANKS */
+.thanks{text-align:center;padding:40px 0 10px;}
+.thanks .big-ico{display:flex;justify-content:center;margin-bottom:20px;animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 6px 20px var(--turq-glow));}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.thanks h2{font-family:var(--serif);font-size:2rem;font-weight:700;margin-bottom:12px;color:var(--ink);letter-spacing:-.3px;}
+.thanks .lead{font-size:.97rem;color:var(--text);line-height:1.7;margin-bottom:8px;}
+.info-card{background:white;border:1px solid var(--border);border-radius:18px;padding:20px 22px;margin:22px 0;text-align:left;}
+.info-row{display:flex;gap:12px;align-items:flex-start;font-size:.88rem;margin-bottom:12px;}
+.info-row:last-child{margin-bottom:0;}
+.info-ico{flex-shrink:0;margin-top:1px;color:var(--turq-deep);display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--turq-pale);border-radius:9px;border:1px solid rgba(10,229,210,.3);}
+.info-row strong{display:block;color:var(--ink);font-size:.95rem;margin-bottom:2px;}
+.info-row span{color:var(--text);display:block;}
+.map-link{display:inline-block;margin-top:6px;color:var(--turq-deep);font-size:.82rem;font-weight:800;text-decoration:none;border-bottom:1px solid var(--turq);padding-bottom:1px;}
+.map-link:hover{color:var(--turq-bright);}
+
+/* LEGAL */
+.legal{background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:15px 17px;margin-top:18px;font-size:.85rem;color:#4A3D2E;line-height:1.7;font-weight:500;}
+.legal a{color:var(--ink);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);}
+.legal a:hover{color:var(--gold);}
+
+footer{text-align:center;font-size:13px;color:#4A3D2E;padding:26px 0 0;letter-spacing:.4px;line-height:1.7;font-weight:600;}
+
+@media(max-width:460px){
+  .opt{padding:13px 14px;gap:12px;}
+  .opt-cube{width:40px;height:40px;font-size:1.3rem;}
+  .opt-lbl{font-size:.92rem;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm7 11a1 1 0 0 0-1 1 6 6 0 0 1-12 0 1 1 0 0 0-2 0 8 8 0 0 0 7 7.93V23h-2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.07A8 8 0 0 0 20 13a1 1 0 0 0-1-1z"/></svg>
+    </div>
+    <div class="logo-text">Твой голос<small>Studio · Нижнекамск</small></div>
+  </div>
+  <div class="since"><strong>25 лет</strong><span>с 1999 года</span></div>
+</header>
+
+<div class="prog-wrap" id="pw"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+<div class="prog-lbl" id="pl"></div>
+
+<!-- ============== INTRO ============== -->
+<div class="screen active" id="s0">
+  <div class="intro">
+    <div class="eyebrow">Бесплатный тест · 60 секунд</div>
+    <h1>Почему у вас<br>не получается петь —<br><em>и как это исправить</em></h1>
+    <p class="lead">4 коротких вопроса — узнаете свой вокальный профиль и получите бесплатное пробное занятие 55 минут один на один с педагогом.</p>
+    <div class="pills">
+      <div class="pill">Взрослым с нуля</div>
+      <div class="pill">Бесплатное пробное</div>
+      <div class="pill">60 секунд</div>
+    </div>
+  </div>
+
+  <div class="teacher-card">
+    <img class="teacher-photo" src="teacher-photo.jpg" alt="Педагог студии «Твой голос»">
+    <div class="teacher-info">
+      <h3>Ваш педагог — Ирек</h3>
+      <p>Основатель студии и автор методики. Работает 1-на-1 с теми, кто никогда раньше не пел и думал, что «не дано».</p>
+      <div class="exp">25 лет опыта · 300+ учеников</div>
+    </div>
+  </div>
+
+  <div class="name-card">
+    <h2>Как к вам обращаться?</h2>
+    <p class="sub">Результат будет персональным — с вашим именем и рекомендацией под ваш голос.</p>
+    <input class="name-inp" id="nameInp" type="text" placeholder="Ваше имя" autocomplete="given-name" maxlength="40">
+    <button class="btn btn-gold" onclick="startQuiz()">Начать тест →</button>
+  </div>
+</div>
+
+<!-- ============== Q1 — EASY EMOTIONAL OPENER ============== -->
+<div class="screen" id="s1">
+  <div class="q-head">
+    <h2 id="q1h">О чём вы мечтаете, когда думаете о пении?</h2>
+    <div class="hint">Выберите, что откликается больше</div>
+  </div>
+  <div class="opts">
+    <div class="opt" data-q="1" data-v="karaoke" onclick="pick(this,1)"><span class="opt-cube">A</span><span class="opt-lbl">Петь в караоке без стеснения</span></div>
+    <div class="opt" data-q="1" data-v="song" onclick="pick(this,1)"><span class="opt-cube">B</span><span class="opt-lbl">Красиво спеть любимую песню</span></div>
+    <div class="opt" data-q="1" data-v="stage" onclick="pick(this,1)"><span class="opt-cube">C</span><span class="opt-lbl">Выступить на сцене</span></div>
+    <div class="opt" data-q="1" data-v="soul" onclick="pick(this,1)"><span class="opt-cube">D</span><span class="opt-lbl">Петь для себя — для радости души</span></div>
+  </div>
+</div>
+
+<!-- ============== Q2 — PAIN POINT (HEART) ============== -->
+<div class="screen" id="s2">
+  <div class="q-head">
+    <h2>Что сейчас мешает вам петь свободно?</h2>
+    <div class="hint">Здесь нет неправильных ответов</div>
+  </div>
+  <div class="opts">
+    <div class="opt" data-q="2" data-v="shy" onclick="pick(this,2)"><span class="opt-cube">A</span><span class="opt-lbl">Стесняюсь — кажется, голос некрасивый</span></div>
+    <div class="opt" data-q="2" data-v="pitch" onclick="pick(this,2)"><span class="opt-cube">B</span><span class="opt-lbl">Не попадаю в ноты, фальшивлю</span></div>
+    <div class="opt" data-q="2" data-v="tired" onclick="pick(this,2)"><span class="opt-cube">C</span><span class="opt-lbl">Голос быстро устаёт и садится</span></div>
+    <div class="opt" data-q="2" data-v="never" onclick="pick(this,2)"><span class="opt-cube">D</span><span class="opt-lbl">Никогда серьёзно не пробовал</span></div>
+  </div>
+</div>
+
+<!-- ============== Q3 — MUSIC STYLE (defines profile) ============== -->
+<div class="screen" id="s3">
+  <div class="q-head">
+    <h2>Какая музыка вам по душе?</h2>
+    <div class="hint">Подсказка педагогу — что приготовить на пробное</div>
+  </div>
+  <div class="opts">
+    <div class="opt" data-q="3" data-v="pop" onclick="pick(this,3)"><span class="opt-cube">A</span><span class="opt-lbl">Эстрада, поп — современная сцена</span></div>
+    <div class="opt" data-q="3" data-v="romance" onclick="pick(this,3)"><span class="opt-cube">B</span><span class="opt-lbl">Романс, лирика — душевные, мелодичные песни</span></div>
+    <div class="opt" data-q="3" data-v="rock" onclick="pick(this,3)"><span class="opt-cube">C</span><span class="opt-lbl">Рок, поп-рок — энергичные, мощные</span></div>
+    <div class="opt" data-q="3" data-v="jazz" onclick="pick(this,3)"><span class="opt-cube">D</span><span class="opt-lbl">Джаз, блюз, soul — с характером</span></div>
+    <div class="opt" data-q="3" data-v="any" onclick="pick(this,3)"><span class="opt-cube">E</span><span class="opt-lbl">Пока не знаю — посоветуйте</span></div>
+  </div>
+</div>
+
+<!-- ============== Q4 — COMMITMENT (warm to action) ============== -->
+<div class="screen" id="s4">
+  <div class="q-head">
+    <h2>С чего хотите начать на первом занятии?</h2>
+    <div class="hint">Педагог настроится именно на это</div>
+  </div>
+  <div class="opts">
+    <div class="opt" data-q="4" data-v="free" onclick="pick(this,4)"><span class="opt-cube">A</span><span class="opt-lbl">Почувствовать, что петь — не страшно и не сложно</span></div>
+    <div class="opt" data-q="4" data-v="sound" onclick="pick(this,4)"><span class="opt-cube">B</span><span class="opt-lbl">Услышать свой голос со стороны и узнать сильные стороны</span></div>
+    <div class="opt" data-q="4" data-v="plan" onclick="pick(this,4)"><span class="opt-cube">C</span><span class="opt-lbl">Получить чёткий план — с чего начать и куда расти</span></div>
+  </div>
+</div>
+
+<!-- ============== RESULT ============== -->
+<div class="screen" id="sResult">
+  <div class="confetti"><span class="star">✦</span><span class="dot">·</span><span class="star">✦</span><span class="dot">·</span><span class="star">✦</span></div>
+  <div class="hail" id="hailText">Ваш профиль определён</div>
+  <div class="p-card" id="pCard">
+    <span class="p-ico" id="pIco">🎤</span>
+    <div class="p-name" id="pName"></div>
+    <div class="p-desc" id="pDesc"></div>
+    <div class="p-tags" id="pTags"></div>
+  </div>
+
+  <div class="lesson-box">
+    <h4>Что вы получите на пробном занятии (55 минут, 1-на-1):</h4>
+    <div class="lstep"><div class="lnum">1</div><div class="ltext"><strong>Услышите свой голос со стороны</strong>Большинство впервые в жизни — момент «оказывается, я звучу лучше, чем думала»</div></div>
+    <div class="lstep"><div class="lnum">2</div><div class="ltext"><strong>Узнаете свой реальный диапазон</strong>Какие ноты — ваши «родные», и где сидит главный зажим</div></div>
+    <div class="lstep"><div class="lnum">3</div><div class="ltext"><strong>Получите 2–3 упражнения «на дом»</strong>Простые, по 5 минут в день — почувствуете прогресс уже к следующей неделе</div></div>
+    <div class="lstep"><div class="lnum">4</div><div class="ltext"><strong>Решите сами, хотите ли продолжать</strong>Без давления и продаж — после занятия вы просто уходите. Никто не звонит и не уговаривает</div></div>
+  </div>
+
+  <div class="safety" style="margin-bottom:18px;">
+    <h4>Что входит, если вы продолжите учиться:</h4>
+    <ul>
+      <li><b>Только индивидуальные занятия</b> 55 минут — никаких групп</li>
+      <li><b>Гибкий график</b> — строим под ваше время</li>
+      <li><b>Без абонентской платы</b> — оплата за факт посещения</li>
+      <li>Полное <b>техническое сопровождение</b></li>
+    </ul>
+  </div>
+
+  <div class="reviews-title">Реальные отзывы учеников</div>
+  <div class="reviews">
+    <div class="review">
+      <p>«Долго очень собиралась на пробное занятие, сомневалась — а зря. С самого начала Ирек располагает к себе и по-простому объясняет, как происходит процесс. Сейчас продолжаю ходить и очень довольна. Грамотный преподаватель, учитывает индивидуальные особенности каждого ученика. И это не только пение — это <b>работа с голосом</b>. Благодарю за то, что вселяете уверенность и даёте испытать радость от результатов.»</p>
+      <div class="reviewer">Ирина Артёмова</div>
+    </div>
+    <div class="review">
+      <p>«Был на пробном уроке, остался под прекрасным впечатлением. Я уже умею петь — регулярно пою в караоке, играю на инструментах. На первом же уроке мне <b>сразу скорректировали одну из грубейших ошибок</b>, о которой я даже не думал. Преподаватель умеет грамотно объяснить ошибку и грамотно её исправить. Однозначно буду приходить на занятия.»</p>
+      <div class="reviewer">Максим</div>
+    </div>
+    <div class="review">
+      <p>«Я в восторге! Меня впечатлили знания Ирека о голосе, пении, техниках, произношении — обо всём, что касается звуков. Оказывается, сколько всего нужно уметь, чтобы казалось бы просто «спеть песню». Забрала для себя несколько моментов, которые буду менять. <b>Видно, что вы профессионал.</b>»</p>
+      <div class="reviewer">Диляра Гарифуллина</div>
+    </div>
+  </div>
+
+  <!-- FORM STEP 1 -->
+  <div class="form-card" id="formS1">
+    <h3>Запишитесь на бесплатное занятие</h3>
+    <div class="form-sub">Без предоплаты и обязательств. 55 минут один на один с педагогом — никаких групп, никаких оценок.</div>
+    <div class="field" id="fg1">
+      <label>Имя</label>
+      <input class="finput" id="fName" type="text" placeholder="Ваше имя">
+      <div class="errmsg">Введите ваше имя</div>
+    </div>
+    <div class="field" id="fg2">
+      <label>Телефон</label>
+      <input class="finput" id="fPhone" type="tel" value="+7 (" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+      <div class="errmsg">Введите корректный номер</div>
+    </div>
+    <div class="consent-row">
+      <input type="checkbox" id="consent">
+      <label for="consent">Согласен/на на обработку персональных данных (имя и телефон) для записи на занятие. Данные не передаются третьим лицам.</label>
+    </div>
+    <div class="errmsg" id="consentErr" style="margin-bottom:10px;">Необходимо ваше согласие</div>
+    <button class="btn btn-gold" onclick="toStep2()">Хочу попробовать →</button>
+    <div class="btn-note">55 минут · Без предоплаты · Без обязательств</div>
+  </div>
+
+  <!-- FORM STEP 2 -->
+  <div class="form-card form-s2" id="formS2" style="margin-top:14px;">
+    <h3>Выберите удобное время</h3>
+    <div class="form-sub">Пн–Сб 14:00–22:00, Вс 16:00–22:00. Свяжемся и подтвердим.</div>
+    <div class="field">
+      <label>Свободный день</label>
+      <div class="days-row">
+        <div class="dday" data-day="Понедельник" onclick="pickDay(this)">Пн</div>
+        <div class="dday" data-day="Вторник" onclick="pickDay(this)">Вт</div>
+        <div class="dday" data-day="Среда" onclick="pickDay(this)">Ср</div>
+        <div class="dday" data-day="Четверг" onclick="pickDay(this)">Чт</div>
+        <div class="dday" data-day="Пятница" onclick="pickDay(this)">Пт</div>
+        <div class="dday" data-day="Суббота" onclick="pickDay(this)">Сб</div>
+        <div class="dday" data-day="Воскресенье" onclick="pickDay(this)">Вс</div>
+      </div>
+      <div class="errmsg" id="dayErr">Выберите удобный день</div>
+    </div>
+    <div class="field">
+      <label>Удобное время</label>
+      <div class="time-row">
+        <div id="ftf"><select class="fsel" id="selFrom"><option value="">От скольки</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option></select><div class="errmsg">Укажите от</div></div>
+        <div id="ftt"><select class="fsel" id="selTo"><option value="">До скольки</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option></select><div class="errmsg">Укажите до</div></div>
+      </div>
+    </div>
+    <button class="btn btn-gold" onclick="submitForm()">Записаться на занятие →</button>
+    <div class="btn-note">Подтвердим время в течение часа</div>
+  </div>
+</div>
+
+<!-- ============== THANKS ============== -->
+<div class="screen" id="sThanks">
+  <div class="thanks">
+    <div class="big-ico">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+        <circle cx="32" cy="32" r="28" fill="none" stroke="#0AE5D2" stroke-width="3"/>
+        <path d="M20 32 L28 40 L44 24" fill="none" stroke="#0AE5D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>Готово, <span id="tyName">друг</span>!</h2>
+    <p class="lead">Заявка принята. Мы позвоним и подтвердим время занятия.</p>
+    <p class="lead">Ничего готовить не нужно — просто приходите.</p>
+    <div class="info-card">
+      <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-7-8-13a8 8 0 0 1 16 0c0 6-8 13-8 13z"/><circle cx="12" cy="9" r="3"/></svg></span><div><strong>Рамус Молл, 5 этаж</strong><span>блок В, комната В-2 · Нижнекамск</span><a class="map-link" href="https://2gis.ru/nizhnekamsk/search/Рамус%20Молл" target="_blank" rel="noopener">Открыть на карте 2ГИС →</a></div></div>
+      <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div><strong>Пн–Сб: 14:00–22:00</strong><span>Воскресенье: 16:00–22:00</span></div></div>
+      <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg></span><div><strong>Авторская методика с 1999 года</strong><span>Взрослым с нуля — никаких вступительных требований</span></div></div>
+      <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></span><div><strong>+7 (917) 247-43-53</strong><span><a href="tel:+79172474353" style="color:var(--turq-deep);font-weight:700;">позвонить, если что-то срочное</a></span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="legal">
+  Реклама · Самозанятый Гайнемухаметов И.Ф. · ИНН 165105867746 · Квиз носит информационно-развлекательный характер, профиль голоса определяется педагогом на занятии. Связь: <a href="tel:+79172474353">+7 (917) 247-43-53</a>
+</div>
+
+<footer>Студия вокала «Твой голос» · Нижнекамск · с 1999 года</footer>
+</div>
+
+<script>
+const SENLER='https://vk.com/app5898182_-198091367#s=3686336';
+const PROFILES={
+  drama:{name:'Драматический голос',ico:'I',cls:'pc-drama',desc:'Мощь, страсть и глубина — ваша природа. Когда раскроется техника, вы сможете петь и Высоцкого, и Земфиру, и арии. На первом занятии педагог покажет, где ваш «потолок» по силе — обычно он гораздо выше, чем кажется.',tags:['Сила тембра','Широкий диапазон','Эмоциональность']},
+  lyric:{name:'Лирический голос',ico:'II',cls:'pc-lyric',desc:'Нежность и искренность — ваши козыри. Такие голоса трогают, даже когда поют тихо. На пробном услышите, как звучите со стороны — почти все ученицы удивляются: «Это правда я?»',tags:['Мягкость','Задушевность','Чистота']},
+  jazz:{name:'Джазовый голос',ico:'III',cls:'pc-jazz',desc:'Свобода, характер и стиль — это про вас. Голос с «изюминкой». На первом занятии Ирек покажет, как использовать эту особенность — обычно её скрывают, а нужно наоборот раскрывать.',tags:['Характер','Гибкость','Стиль']},
+  pop:{name:'Эстрадный голос',ico:'IV',cls:'pc-pop',desc:'Яркость и сцена — ваша территория. Такие голоса легко учатся: за 4–6 занятий вы сможете спокойно петь любимые хиты дома, в караоке, на праздниках. Главное — никаких «врождённых талантов» не требуется.',tags:['Яркость','Харизма','Сценичность']}
+};
+let answers={},userName='',selectedDay='';
+
+function getProfile(){
+  const s=answers[3];
+  if(s==='jazz')return'jazz';
+  if(s==='romance')return'lyric';
+  if(s==='rock')return'drama';
+  if(s==='any'){
+    // For "не знаю" — pick based on Q2 pain
+    const p=answers[2];
+    if(p==='shy')return'lyric';
+    if(p==='pitch'||p==='never')return'pop';
+    return'pop';
+  }
+  return'pop';
+}
+
+function startQuiz(){
+  const n=document.getElementById('nameInp').value.trim();
+  if(n.length<2){
+    const i=document.getElementById('nameInp');
+    i.style.borderColor='var(--rose)';
+    i.style.background='#FCEEF0';
+    i.focus();
+    return;
+  }
+  userName=n.split(' ')[0];
+  userName=userName.charAt(0).toUpperCase()+userName.slice(1).toLowerCase();
+  document.getElementById('fName').value=n;
+  document.getElementById('q1h').textContent=userName+', о чём вы мечтаете, когда думаете о пении?';
+  show('s1');
+  document.getElementById('pw').style.display='block';
+  document.getElementById('pl').style.display='block';
+  updP(1);
+}
+
+function pick(el,q){
+  document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  answers[q]=el.dataset.v;
+  setTimeout(()=>{
+    if(q<4){show('s'+(q+1));updP(q+1);}
+    else showResult();
+  },300);
+}
+
+function updP(q){
+  document.getElementById('pf').style.width=Math.round(((q-1)/4)*100)+'%';
+  document.getElementById('pl').textContent='Вопрос '+q+' из 4';
+}
+
+function showResult(){
+  const k=getProfile(),p=PROFILES[k];
+  document.getElementById('hailText').innerHTML='<span class="shimmer">'+userName+'</span>, ваш вокальный профиль определён!';
+  const c=document.getElementById('pCard');
+  c.className='p-card '+p.cls;
+  document.getElementById('pIco').textContent=p.ico;
+  document.getElementById('pName').textContent=p.name;
+  document.getElementById('pDesc').textContent=p.desc;
+  document.getElementById('pTags').innerHTML=p.tags.map(t=>'<span class="p-tag">'+t+'</span>').join('');
+  document.getElementById('pf').style.width='100%';
+  document.getElementById('pl').textContent='Результат готов';
+  show('sResult');
+  setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),50);
+}
+
+function pickDay(el){
+  document.querySelectorAll('.dday').forEach(d=>d.classList.remove('on'));
+  el.classList.add('on');
+  selectedDay=el.dataset.day;
+  document.getElementById('dayErr').style.display='none';
+}
+
+function toStep2(){
+  let ok=true;
+  const name=document.getElementById('fName').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+  const cb=document.getElementById('consent');
+  const ce=document.getElementById('consentErr');
+  const fg1=document.getElementById('fg1');
+  if(name.length<2){fg1.classList.add('has-err');ok=false;}else fg1.classList.remove('has-err');
+  const fg2=document.getElementById('fg2');
+  if(phone.replace(/\D/g,'').length<10){fg2.classList.add('has-err');ok=false;}else fg2.classList.remove('has-err');
+  if(!cb.checked){ce.style.display='block';ok=false;}else ce.style.display='none';
+  if(!ok)return;
+  document.getElementById('formS1').style.display='none';
+  const s2=document.getElementById('formS2');
+  s2.style.display='block';
+  setTimeout(()=>s2.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function submitForm(){
+  let ok=true;
+  const from=document.getElementById('selFrom').value;
+  const to=document.getElementById('selTo').value;
+  const de=document.getElementById('dayErr');
+  const ftf=document.getElementById('ftf');
+  const ftt=document.getElementById('ftt');
+  if(!selectedDay){de.style.display='block';ok=false;}else de.style.display='none';
+  if(!from){ftf.classList.add('has-err');ok=false;}else ftf.classList.remove('has-err');
+  if(!to){ftt.classList.add('has-err');ok=false;}else ftt.classList.remove('has-err');
+  if(!ok)return;
+  setTimeout(()=>window.open(SENLER,'_blank'),400);
+  document.getElementById('tyName').textContent=userName;
+  document.getElementById('pw').style.display='none';
+  document.getElementById('pl').style.display='none';
+  show('sThanks');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function shareQuiz(){
+  const url=window.location.href;
+  if(navigator.share){
+    navigator.share({title:'Узнайте свой голос — Студия «Твой голос»',url:url});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(url);
+    alert('Ссылка скопирована!');
+  }
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none';});
+  const el=document.getElementById(id);
+  el.style.display='block';
+  setTimeout(()=>el.classList.add('active'),10);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const ph=document.getElementById('fPhone');
+  function fmtPhone(raw){
+    let d=raw.replace(/\D/g,'');
+    // Strip leading country code (7 or 8) — always normalize to +7
+    if(d.length>0 && (d[0]==='7' || d[0]==='8')) d=d.slice(1);
+    d=d.slice(0,10);
+    let r='+7 (';
+    if(d.length>0) r+=d.slice(0,3);
+    if(d.length>=3) r+=') ';
+    if(d.length>3) r+=d.slice(3,6);
+    if(d.length>6) r+='-'+d.slice(6,8);
+    if(d.length>8) r+='-'+d.slice(8,10);
+    return r;
+  }
+  ph.addEventListener('input',function(){ this.value=fmtPhone(this.value); });
+  ph.addEventListener('focus',function(){
+    if(this.value.replace(/\D/g,'').length<=1){
+      this.value='+7 (';
+      setTimeout(()=>this.setSelectionRange(this.value.length,this.value.length),0);
+    }
+  });
+  ph.addEventListener('keydown',function(e){
+    // Prevent deleting the "+7 (" prefix
+    if((e.key==='Backspace'||e.key==='Delete') && this.value.replace(/\D/g,'').length<=1){
+      e.preventDefault();
+      this.value='+7 (';
+      this.setSelectionRange(this.value.length,this.value.length);
+    }
+  });
+  document.getElementById('nameInp').addEventListener('keydown',e=>{if(e.key==='Enter')startQuiz();});
+});
+</script>
+</body>
+</html>
