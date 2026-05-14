@@ -1,8 +1,18 @@
 # 🎤 Вокальная школа "Твой голос" — Техническая документация
 
-**Дата:** 2026-05-13
-**Версия:** 5.0 (квиз V5)
-**Статус:** 🚀 Квиз готов, ожидает хостинга и запуска ВК-таргета
+**Дата:** 2026-05-14
+**Версия:** 5.1 (квиз V5 + OFFLINE + GitHub Pages)
+**Статус:** 🚀 Квиз опубликован, ожидает BOT_TOKEN и запуск ВК-таргета
+
+## 🌐 Публичная ссылка (для VK / TG / Max / Instagram bio)
+```
+https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/13_QUIZ-V5-FINAL.html
+```
+
+## 📦 Варианты файла
+- `13_QUIZ-V5-FINAL.html` — основной (50 КБ, Google Fonts + teacher-photo.jpg)
+- `13_QUIZ-V5-OFFLINE.html` — полностью оффлайн (5.33 МБ, fonts+photo как base64)
+- `make_offline.py` — генератор оффлайн-версии: `python make_offline.py`
 
 ## 🆕 АКТУАЛЬНЫЙ КВИЗ — V5
 
