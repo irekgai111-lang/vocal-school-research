@@ -6,7 +6,7 @@
 
 ## 🌐 Публичные ссылки
 
-- **Квиз V6:** https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/14_QUIZ-V6.html
+- **Квиз V6:** https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/15_QUIZ-V7.html
 - **Политика ПДн:** https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/privacy.html
 - **Legacy V5 (fallback):** https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/13_QUIZ-V5-FINAL.html
 
@@ -14,7 +14,7 @@
 
 | Файл | Назначение |
 |------|-----------|
-| `14_QUIZ-V6.html` | **Актуальный квиз** (7 экранов, отсев, инсайт про мышцы, 5 сценариев) |
+| `15_QUIZ-V7.html` | **Актуальный квиз** (7 экранов, отсев, инсайт про мышцы, 5 сценариев) |
 | `privacy.html` | Политика обработки персональных данных (по 152-ФЗ) |
 | `logo.jpg` | Оригинал логотипа «Твой голос» |
 | `logo-wordmark.png` | Обрезанный логотип с прозрачным фоном для шапки квиза |

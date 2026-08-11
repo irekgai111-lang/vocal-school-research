@@ -8,13 +8,13 @@
 
 ## 🎤 АКТУАЛЬНЫЙ КВИЗ — V6 (универсальный)
 
-**Главный файл:** `14_QUIZ-V6.html`
+**Главный файл:** `15_QUIZ-V7.html`
 **Политика ПДн:** `privacy.html` (обязательный документ)
 **Логотип:** `logo.jpg` (оригинал) + `logo-wordmark.png` (обрезанный без фона для шапки)
 **Фото педагога:** `teacher-photo.jpg`
 
 **Публичные ссылки (GitHub Pages):**
-- Квиз V6: https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/14_QUIZ-V6.html
+- Квиз V6: https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/15_QUIZ-V7.html
 - Политика: https://irekgai111-lang.github.io/vocal-school-research/vocal-quiz-funnel/privacy.html
 
 **Что в квизе V6 (7 экранов):**
@@ -55,7 +55,7 @@
 
 ```
 vocal-quiz-funnel/
-├── 14_QUIZ-V6.html              ← основной квиз (PROD)
+├── 15_QUIZ-V7.html              ← основной квиз (PROD)
 ├── privacy.html                 ← Политика ПДн (PROD)
 ├── logo.jpg                     ← оригинал лого
 ├── logo-wordmark.png            ← обрезанный лого для шапки (transparent bg)
